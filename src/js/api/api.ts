@@ -9,21 +9,21 @@ const authData = {
   token:
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMDY1NjRmNjUwM2Y4MDAxNmRhZjI0ZiIsImlhdCI6MTY2MTM2OTk1NiwiZXhwIjoxNjYxMzg0MzU2fQ.3B6pJQRCrBMrlUxu_3lSti_71Ne_p0xN1Fycsa-Y4o4',
   userId: '6306564f6503f80016daf24f',
-}; // Пример authData c Local-storage
+};
 
 export const getChunkWords = async (page: number, group: number) => {
   const url = `https://rslang-data.herokuapp.com/words?page=${page}&group=${group}`;
   const rawResponse = await fetch(url);
+  if (!rawResponse.ok) throw Error();
   return rawResponse.json();
 };
-// console.log(getChunkWords(1, 1)); // Promise arrWords(20)
 
 export const getWordsById = async (wordId: string) => {
   const url = `https://rslang-data.herokuapp.com/words/${wordId}`;
   const rawResponse = await fetch(url);
+  if (!rawResponse.ok) throw Error();
   return rawResponse.json();
 };
-// console.log(getWordsById('5e9f5ee35eb9e72bc21af4a2')); // Promis {...}
 
 // user
 export const createUser = async (user: User) => {
@@ -35,15 +35,9 @@ export const createUser = async (user: User) => {
     },
     body: JSON.stringify(user),
   });
-  if (rawResponse.status !== 200) throw Error();
+  if (!rawResponse.ok) throw Error();
   return rawResponse.json();
 };
-// const user1 = {
-//   name: 'Andrey',
-//   email: 'mall@okay.com',
-//   password: '12345678',
-// };
-// console.log(createUser(user1)); //Результат Promis {email: "mall@okay.com", id: "63055469340de10016a3b477", name: "Andrey"}
 
 export const getUser = async (userId: string, token: string) => {
   const rawResponse = await fetch(`https://rslang-data.herokuapp.com/users/${userId}`, {
@@ -53,19 +47,10 @@ export const getUser = async (userId: string, token: string) => {
       Accept: 'application/json',
     },
   });
-  if (rawResponse.status !== 200) throw Error();
+  if (!rawResponse.ok) throw Error();
   return rawResponse.json();
 };
-// const testId = '63055469340de10016a3b477';
-// const testToken =
-//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMDU1NDY5MzQwZGUxMDAxNmEzYjQ3NyIsImlhdCI6MTY2MTI5Mzc0OCwiZXhwIjoxNjYxMzA4MTQ4fQ.-CSfw0GwAcHy8V7YqDg096hcqdABknu_-PDoZeZZH9Y';
-// console.log(getUser(testId, testToken));
-/*
-[[PromiseResult]]: Object
-  email: "mall@okay.com"
-  id: "63055469340de10016a3b477"
-  name: "Andrey"
-*/
+
 export const updateUser = async (userId: string, token: string, updateUser: SignInUser) => {
   const rawResponse = await fetch(`https://rslang-data.herokuapp.com/users/${userId}`, {
     method: 'PUT',
@@ -76,21 +61,9 @@ export const updateUser = async (userId: string, token: string, updateUser: Sign
     },
     body: JSON.stringify(updateUser),
   });
-  if (rawResponse.status !== 200) throw Error();
+  if (!rawResponse.ok) throw Error();
   return rawResponse.json();
 };
-// const testId = '63055469340de10016a3b477';
-// const testToken =
-//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMDU1NDY5MzQwZGUxMDAxNmEzYjQ3NyIsImlhdCI6MTY2MTI5Mzc0OCwiZXhwIjoxNjYxMzA4MTQ4fQ.-CSfw0GwAcHy8V7YqDg096hcqdABknu_-PDoZeZZH9Y';
-// const testUpdateUser = {
-//   email: 'mall@okay.com',
-//   password: '12345678',
-// };
-// console.log(updateUser(testId, testToken, testUpdateUser));
-/* [[PromiseResult]]: Object
-email: "mall@okay.com"
-id: "63055469340de10016a3b477"
-name: "Andrey" */
 
 export const deleteUser = async (userId: string, token: string) => {
   const rawResponse = await fetch(`https://rslang-data.herokuapp.com/users/${userId}`, {
@@ -99,16 +72,12 @@ export const deleteUser = async (userId: string, token: string) => {
       Authorization: `Bearer ${token}`,
     },
   });
-  if (rawResponse.status !== 204) throw Error();
+  if (!rawResponse.ok) throw Error();
   if (rawResponse.status == 204) console.log('Удалено');
 };
-// const testId = '63055469340de10016a3b477';
-// const testToken =
-//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMDU1NDY5MzQwZGUxMDAxNmEzYjQ3NyIsImlhdCI6MTY2MTI5Mzc0OCwiZXhwIjoxNjYxMzA4MTQ4fQ.-CSfw0GwAcHy8V7YqDg096hcqdABknu_-PDoZeZZH9Y'
-// console.log(deleteUser(testId, testToken));
 
 export const getNewToken = async (userId: string, refreshToken: string) => {
-  // завязать с localStorag - взять аргументы с localStorage
+  // завязать authData.refreshToken с localStorag - взять аргументы с localStorage
   const url = `https://rslang-data.herokuapp.com/users/${userId}/tokens`;
   const rawResponse = await fetch(url, {
     method: 'GET',
@@ -118,17 +87,13 @@ export const getNewToken = async (userId: string, refreshToken: string) => {
       'Content-Type': 'application/json',
     },
   });
-  if (rawResponse.status !== 200) throw Error();
+  if (!rawResponse.ok) throw Error();
   return rawResponse.json();
 };
-// const testId = '63055469340de10016a3b477';
-// const testRefreshToken =
-//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMDY1NjRmNjUwM2Y4MDAxNmRhZjI0ZiIsImlhdCI6MTY2MTM2OTk1NiwiZXhwIjoxNjYxMzg0MzU2fQ.3B6pJQRCrBMrlUxu_3lSti_71Ne_p0xN1Fycsa-Y4o4';
-// console.log(getNewToken(testId, testRefreshToken));
 
 // Users/Words
 export const getAllUserWords = async (userId: string) => {
-  // const authData = getLocalStorage(key);
+  // завязать authData с localStorag - взять аргументы с localStorage
   const url = `https://rslang-data.herokuapp.com/users/${userId}/words`;
   const rawResponse = await fetch(url, {
     method: 'GET',
@@ -137,12 +102,12 @@ export const getAllUserWords = async (userId: string) => {
       Accept: 'application/json',
     },
   });
-  if (rawResponse.status !== 200) throw Error();
+  if (!rawResponse.ok) throw Error();
   return rawResponse.json();
 };
 
 export const createUserWord = async ({ userId, wordId, word }: { userId: string; wordId: string; word: string }) => {
-  // const authData = getLocalStorage(key) // authData.token // взять перемую с localStorage
+  // завязать authData с localStorag - взять аргументы с localStorage
   const rawResponse = await fetch(`rslang-data.herokuapp.com/users/${userId}/words/${wordId}`, {
     method: 'POST',
     headers: {
@@ -152,11 +117,12 @@ export const createUserWord = async ({ userId, wordId, word }: { userId: string;
     },
     body: JSON.stringify(word),
   });
+  if (!rawResponse.ok) throw Error();
   return rawResponse.json();
 };
 
 export const getUserWordById = async ({ userId, wordId }: { userId: string; wordId: string }) => {
-  // const authData = getLocalStorage(key) // authData.token // взять переменную с localStorage
+  // завязать authData с localStorag - взять аргументы с localStorage
   const rawResponse = await fetch(`rslang-data.herokuapp.com/users/${userId}/words/${wordId}`, {
     method: 'GET',
     headers: {
@@ -164,11 +130,12 @@ export const getUserWordById = async ({ userId, wordId }: { userId: string; word
       Accept: 'application/json',
     },
   });
+  if (!rawResponse.ok) throw Error();
   return rawResponse.json();
 };
 
 export const updateUserWord = async ({ userId, wordId }: { userId: string; wordId: string }) => {
-  // const authData = getLocalStorage(key) // authData.token // взять переменную с localStorage
+  // завязать authData с localStorag - взять аргументы с localStorage
   const rawResponse = await fetch(`rslang-data.herokuapp.com/users/${userId}/words/${wordId}`, {
     method: 'GET',
     headers: {
@@ -176,6 +143,7 @@ export const updateUserWord = async ({ userId, wordId }: { userId: string; wordI
       Accept: 'application/json',
     },
   });
+  if (!rawResponse.ok) throw Error();
   return rawResponse.json();
 };
 
@@ -186,13 +154,13 @@ export const deleteUserWord = async ({ userId, wordId }: { userId: string; wordI
       Authorization: `Bearer ${authData.token}`,
     },
   });
-  if (rawResponse.status !== 204) throw Error();
+  if (!rawResponse.ok) throw Error();
   if (rawResponse.status == 204) console.log('Word removed');
 };
 
 //Users/AggregatedWords
 export const getAllAggregatedWords = async () => {
-  // const authData = getLocalStorage(key) // authData.token // взять переменную с localStorage
+  // завязать authData с localStorag - взять аргументы с localStorage
   const currentFilter = '{"userWord": {"$ne": null}}';
   const url = `https://rslang-data.herokuapp.com/users/${authData.userId}/aggregatedWords?wordsPerPage=3600&filter=${currentFilter}`;
   const rawResponse = await fetch(url, {
@@ -202,12 +170,12 @@ export const getAllAggregatedWords = async () => {
       Accept: 'application/json',
     },
   });
-  if (rawResponse.status !== 200) throw Error();
+  if (!rawResponse.ok) throw Error();
   return rawResponse.json();
 };
 
 export const getAggregatedWordsById = async (wordId: string) => {
-  // const authData = getLocalStorage(key) // authData.token // взять переменную с localStorage
+  // завязать authData с localStorag - взять аргументы с localStorage
   const url = `https://rslang-data.herokuapp.com/users/${authData.userId}/aggregatedWords/${wordId}`;
   const rawResponse = await fetch(url, {
     method: 'GET',
@@ -216,13 +184,13 @@ export const getAggregatedWordsById = async (wordId: string) => {
       Accept: 'application/json',
     },
   });
-  if (rawResponse.status !== 200) throw Error();
+  if (!rawResponse.ok) throw Error();
   return rawResponse.json();
 };
 
 //Users/Statistic
 export const getStatistics = async () => {
-  // const authData = getLocalStorage(key) // authData.token // взять переменную с localStorage
+  // завязать authData с localStorag - взять аргументы с localStorage
   const url = `https://rslang-data.herokuapp.com/users/${authData.userId}/statistics`;
   const rawResponse = await fetch(url, {
     method: 'GET',
@@ -231,12 +199,12 @@ export const getStatistics = async () => {
       Accept: 'application/json',
     },
   });
-  if (rawResponse.status !== 200) throw Error();
+  if (!rawResponse.ok) throw Error();
   return rawResponse.json();
 };
 
 export const setStatistics = async (statistics: { statistics: string }) => {
-  // const authData = getLocalStorage(key) // authData.token // взять переменную с localStorage
+  // завязать authData с localStorag - взять аргументы с localStorage
   const url = `https://rslang-data.herokuapp.com/users/${authData.userId}/statistics`;
   const rawResponse = await fetch(url, {
     method: 'PUT',
@@ -247,13 +215,13 @@ export const setStatistics = async (statistics: { statistics: string }) => {
     },
     body: JSON.stringify(statistics),
   });
-  if (rawResponse.status !== 200) throw Error();
+  if (!rawResponse.ok) throw Error();
   return rawResponse.json();
 };
 
 //Users/Setting
 export const getSettings = async () => {
-  // const authData = getLocalStorage(key) // authData.token // взять переменную с localStorage
+  //завязать authData с localStorag - взять аргументы с localStorage
   const rawResponse = await fetch(`https://https://rslang-data.herokuapp.com/users/${authData.userId}/settings`, {
     method: 'GET',
     headers: {
@@ -261,13 +229,13 @@ export const getSettings = async () => {
       Accept: 'application/json',
     },
   });
-  if (rawResponse.status !== 200) throw Error();
+  if (!rawResponse.ok) throw Error();
   return rawResponse.json();
 };
 
 export const setSettings = async (data: { wordsPerDay: number; optional: /* ! */ { optional: string } }) => {
   /* ! Создать интерфейс для optional */
-  // const authData = getLocalStorage(key) // authData.token // взять переменную с localStorage
+  //завязать authData с localStorag - взять аргументы с localStorage
   const rawResponse = await fetch(`https://rslang-data.herokuapp.com/users/${authData.userId}/settings`, {
     method: 'PUT',
     headers: {
@@ -277,9 +245,7 @@ export const setSettings = async (data: { wordsPerDay: number; optional: /* ! */
     },
     body: JSON.stringify(data),
   });
-  if (rawResponse.status !== 200) {
-    return Promise.reject(rawResponse.status);
-  }
+  if (!rawResponse.ok) throw Error();
   return rawResponse.json();
 };
 
@@ -293,11 +259,6 @@ export const sigIn = async (user: SignInUser) => {
     },
     body: JSON.stringify(user),
   });
+  if (!rawResponse.ok) throw Error();
   return rawResponse.json();
 };
-// const user = {
-//   email: 'mall@okay.com',
-//   password: '12345678',
-// };
-// const objUser = sigIn(user);
-// console.log(objUser.then(data => console.log(data.token)));
