@@ -118,9 +118,22 @@ export const createUserWord = async ({ wordId, word }: { wordId: string; word: s
   return rawResponse.json();
 };
 
-export const getUserWordById = async ({ wordId }: { wordId: string }) => {
+export const getUserWordById = async (wordId: string) => {
   const authData = getLocalStorage('auth');
-  const rawResponse = await fetch(`rslang-data.herokuapp.com/users/${authData.userId}/words/${wordId}`, {
+  const rawResponse = await fetch(`${base}/users/${authData.userId}/words/${wordId}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${authData.token}`,
+      Accept: 'application/json',
+    },
+  });
+  if (!rawResponse.ok) throw Error(`Error${rawResponse.status}`);
+  return rawResponse.json();
+};
+
+export const updateUserWord = async (wordId: string) => {
+  const authData = getLocalStorage('auth');
+  const rawResponse = await fetch(`${base}/users/${authData.userId}/words/${wordId}`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${authData.token}`, //
@@ -131,22 +144,9 @@ export const getUserWordById = async ({ wordId }: { wordId: string }) => {
   return rawResponse.json();
 };
 
-export const updateUserWord = async ({ wordId }: { wordId: string }) => {
+export const deleteUserWord = async (wordId: string) => {
   const authData = getLocalStorage('auth');
-  const rawResponse = await fetch(`rslang-data.herokuapp.com/users/${authData.userId}/words/${wordId}`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${authData.token}`, //
-      Accept: 'application/json',
-    },
-  });
-  if (!rawResponse.ok) throw Error(`Error${rawResponse.status}`);
-  return rawResponse.json();
-};
-
-export const deleteUserWord = async ({ wordId }: { wordId: string }) => {
-  const authData = getLocalStorage('auth');
-  const rawResponse = await fetch(`rslang-data.herokuapp.com/users/${authData.userId}/words/${wordId}`, {
+  const rawResponse = await fetch(`${base}/users/${authData.userId}/words/${wordId}`, {
     method: 'DELETE',
     headers: {
       Authorization: `Bearer ${authData.token}`,
