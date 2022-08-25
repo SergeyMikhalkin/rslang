@@ -25,7 +25,11 @@ class Popup {
 
     const popupBody = document.createElement('div');
     popupBody.className = 'popup__body';
-    popupBody.innerHTML = this.htmlContent;
+    const popupContentElem = document.createElement('div');
+    popupContentElem.className = 'popup__content';
+    popupContentElem.innerHTML = this.htmlContent;
+
+    popupBody.append(popupContentElem);
     popupBody.append(this.btnClose);
 
     wrapperElem.append(popupBody);
