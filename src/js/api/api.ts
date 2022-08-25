@@ -103,7 +103,7 @@ export const getAllUserWords = async () => {
   return rawResponse.json();
 };
 //!
-export const createUserWord = async ({ wordId, word }: { wordId: string; word: string }) => {
+export const createUserWord = async <T>({ wordId, optional }: { wordId: string; optional: T }) => {
   const authData = getLocalStorage('auth');
   const rawResponse = await fetch(`${base}/users/${authData.userId}/words/${wordId}`, {
     method: 'POST',
@@ -112,7 +112,7 @@ export const createUserWord = async ({ wordId, word }: { wordId: string; word: s
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(word),
+    body: JSON.stringify(optional),
   });
   if (!rawResponse.ok) throw Error(`Error${rawResponse.status}`);
   return rawResponse.json();
@@ -131,14 +131,15 @@ export const getUserWordById = async (wordId: string) => {
   return rawResponse.json();
 };
 
-export const updateUserWord = async (wordId: string) => {
+export const updateUserWord = async <T>(wordId: string, optional: T) => {
   const authData = getLocalStorage('auth');
   const rawResponse = await fetch(`${base}/users/${authData.userId}/words/${wordId}`, {
-    method: 'GET',
+    method: 'PUT',
     headers: {
       Authorization: `Bearer ${authData.token}`, //
       Accept: 'application/json',
     },
+    body: JSON.stringify(optional),
   });
   if (!rawResponse.ok) throw Error(`Error${rawResponse.status}`);
   return rawResponse.json();
@@ -201,7 +202,7 @@ export const getStatistics = async () => {
   return rawResponse.json();
 };
 //!
-export const setStatistics = async (statistics: { statistics: string }) => {
+export const setStatistics = async <T>(statistics: { learnedWords: number; optional: T }) => {
   const authData = getLocalStorage('auth');
   const url = `${base}/users/${authData.userId}/statistics`;
   const rawResponse = await fetch(url, {
@@ -231,7 +232,7 @@ export const getSettings = async () => {
   return rawResponse.json();
 };
 
-export const setSettings = async (data: { wordsPerDay: number; optional: /* ! */ { optional: string } }) => {
+export const setSettings = async <T>(data: { wordsPerDay: number; optional: T }) => {
   const authData = getLocalStorage('auth');
   /* ! Создать интерфейс для optional */
   const rawResponse = await fetch(`${base}/users/${authData.userId}/settings`, {
