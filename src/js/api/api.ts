@@ -282,3 +282,22 @@ export const setSettings = async (data: { wordsPerDay: number; optional: /* ! */
   }
   return rawResponse.json();
 };
+
+// Sign In
+export const sigIn = async (user: SignInUser) => {
+  const rawResponse = await fetch('https://rslang-data.herokuapp.com/signin', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(user),
+  });
+  return rawResponse.json();
+};
+// const user = {
+//   email: 'mall@okay.com',
+//   password: '12345678',
+// };
+// const objUser = sigIn(user);
+// console.log(objUser.then(data => console.log(data.token)));
