@@ -1,0 +1,96 @@
+.home-list
+  list-style: none
+
+  &:not(:hover)
+    .home-list__item--highlight::before
+      opacity: 1
+
+  &__item
+    position: relative
+    display: flex
+    align-items: center
+
+    font-weight: 700
+    color: inherit
+
+    height: 48px
+    padding-left: 70px
+    font-size: 25px
+    line-height: 0.8em
+
+    @include tablet
+      height: 79px
+      padding-left: 130px
+      font-size: 32px
+
+    // Icon
+    &::before
+      opacity: 0
+      content: ''
+      position: absolute
+      left: 0
+      top: 0
+
+      display: block
+      height: 100%
+      width: 48px
+
+      @include tablet
+        width: 79px
+
+    &:hover
+      &::before
+        animation: smooth-rotate 300ms 100ms ease both
+        opacity: 1
+
+    &--book::before
+      background: url('./assets/home/book.png') no-repeat center/ contain
+    &--audiocall::before
+      background: url('./assets/home/audiocall.png') no-repeat center/ contain
+    &--sprint::before
+      background: url('./assets/home/sprint.png') no-repeat center/ contain
+    &--stats::before
+      background: url('./assets/home/stats.png') no-repeat center/ contain
+
+  &__link
+    position: relative
+    text-decoration: none
+    color: inherit
+
+    padding-left: 30px
+    @include tablet
+      padding-left: 40px
+
+    // list-item Circle
+    &::before
+      content: ''
+      position: absolute
+      left: 0
+      top: 50%
+      transform: translateY(-50%)
+
+      display: block
+      box-sizing: border-box
+      border-radius: 50%
+      border: 1px solid #000000
+      color: inherit
+
+      width: 12px
+      height: 12px
+      @include tablet
+        width: 17px
+        height: 17px
+
+    &:hover
+      &::before
+        border-color: #33BBBA
+        background-color: #33BBBA
+
+@keyframes smooth-rotate
+  from
+    opacity: 0
+    transform: scale(1) rotateY(90deg)
+  30%
+    opacity: 1
+  to
+    transform: scale(1) rotateY(0%)
