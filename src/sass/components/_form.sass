@@ -1,0 +1,30 @@
+.auth-form
+  display: flex
+  flex-direction: column
+
+  &__field,
+  &__btn
+    margin-bottom: 15px
+    padding: 10px
+    border-radius: 5px
+
+  &__btn
+    align-self: flex-start
+    display: inline-block
+    color: #fff
+    background-color: #F27A31
+
+.form-tab
+  &:not(.is-visible)
+    display: none
+  &__toggler
+    &:not(.is-active)
+      color: #000
+      &:hover
+        cursor: pointer
+        text-decoration: underline
+
+  &-togglers
+    margin-top: 50px
+    color: #fff
+    &__item
