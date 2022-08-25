@@ -125,3 +125,67 @@ export const getNewToken = async (userId: string, refreshToken: string) => {
 // const testRefreshToken =
 //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMDY1NjRmNjUwM2Y4MDAxNmRhZjI0ZiIsImlhdCI6MTY2MTM2OTk1NiwiZXhwIjoxNjYxMzg0MzU2fQ.3B6pJQRCrBMrlUxu_3lSti_71Ne_p0xN1Fycsa-Y4o4';
 // console.log(getNewToken(testId, testRefreshToken));
+
+// Users/Words
+export const getAllUserWords = async (userId: string) => {
+  // const authData = getLocalStorage(key);
+  const url = `https://rslang-data.herokuapp.com/users/${userId}/words`;
+  const rawResponse = await fetch(url, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${authData.token}`,
+      Accept: 'application/json',
+    },
+  });
+  if (rawResponse.status !== 200) throw Error();
+  return rawResponse.json();
+};
+
+export const createUserWord = async ({ userId, wordId, word }: { userId: string; wordId: string; word: string }) => {
+  // const authData = getLocalStorage(key) // authData.token // взять перемую с localStorage
+  const rawResponse = await fetch(`rslang-data.herokuapp.com/users/${userId}/words/${wordId}`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${authData.token}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(word),
+  });
+  return rawResponse.json();
+};
+
+export const getUserWordById = async ({ userId, wordId }: { userId: string; wordId: string }) => {
+  // const authData = getLocalStorage(key) // authData.token // взять переменную с localStorage
+  const rawResponse = await fetch(`rslang-data.herokuapp.com/users/${userId}/words/${wordId}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${authData.token}`, //
+      Accept: 'application/json',
+    },
+  });
+  return rawResponse.json();
+};
+
+export const updateUserWord = async ({ userId, wordId }: { userId: string; wordId: string }) => {
+  // const authData = getLocalStorage(key) // authData.token // взять переменную с localStorage
+  const rawResponse = await fetch(`rslang-data.herokuapp.com/users/${userId}/words/${wordId}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${authData.token}`, //
+      Accept: 'application/json',
+    },
+  });
+  return rawResponse.json();
+};
+
+export const deleteUserWord = async ({ userId, wordId }: { userId: string; wordId: string }) => {
+  const rawResponse = await fetch(`rslang-data.herokuapp.com/users/${userId}/words/${wordId}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${authData.token}`,
+    },
+  });
+  if (rawResponse.status !== 204) throw Error();
+  if (rawResponse.status == 204) console.log('Word removed');
+};
