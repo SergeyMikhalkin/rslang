@@ -219,3 +219,34 @@ export const getAggregatedWordsById = async (wordId: string) => {
   if (rawResponse.status !== 200) throw Error();
   return rawResponse.json();
 };
+
+//Users/Statistic
+export const getStatistics = async () => {
+  // const authData = getLocalStorage(key) // authData.token // взять переменную с localStorage
+  const url = `https://rslang-data.herokuapp.com/users/${authData.userId}/statistics`;
+  const rawResponse = await fetch(url, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${authData.token}`,
+      Accept: 'application/json',
+    },
+  });
+  if (rawResponse.status !== 200) throw Error();
+  return rawResponse.json();
+};
+
+export const setStatistics = async (statistics: { statistics: string }) => {
+  // const authData = getLocalStorage(key) // authData.token // взять переменную с localStorage
+  const url = `https://rslang-data.herokuapp.com/users/${authData.userId}/statistics`;
+  const rawResponse = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${authData.token}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(statistics),
+  });
+  if (rawResponse.status !== 200) throw Error();
+  return rawResponse.json();
+};
