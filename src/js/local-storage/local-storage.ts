@@ -1,13 +1,6 @@
-// import { Auth } from '../interfaces/auth';
-export interface Auth {
-  massage: string;
-  token: string;
-  refreshToken: string;
-  userId: string;
-  name: string;
-}
+import { Auth } from '../interfaces/auth';
 
-export const getLocalStorage = (key: string) => {
+export const getLocalStorage = (key: string): Auth => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key) || '') : undefined;
 };
