@@ -189,3 +189,33 @@ export const deleteUserWord = async ({ userId, wordId }: { userId: string; wordI
   if (rawResponse.status !== 204) throw Error();
   if (rawResponse.status == 204) console.log('Word removed');
 };
+
+//Users/AggregatedWords
+export const getAllAggregatedWords = async () => {
+  // const authData = getLocalStorage(key) // authData.token // взять переменную с localStorage
+  const currentFilter = '{"userWord": {"$ne": null}}';
+  const url = `https://rslang-data.herokuapp.com/users/${authData.userId}/aggregatedWords?wordsPerPage=3600&filter=${currentFilter}`;
+  const rawResponse = await fetch(url, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${authData.token}`,
+      Accept: 'application/json',
+    },
+  });
+  if (rawResponse.status !== 200) throw Error();
+  return rawResponse.json();
+};
+
+export const getAggregatedWordsById = async (wordId: string) => {
+  // const authData = getLocalStorage(key) // authData.token // взять переменную с localStorage
+  const url = `https://rslang-data.herokuapp.com/users/${authData.userId}/aggregatedWords/${wordId}`;
+  const rawResponse = await fetch(url, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${authData.token}`,
+      Accept: 'application/json',
+    },
+  });
+  if (rawResponse.status !== 200) throw Error();
+  return rawResponse.json();
+};
