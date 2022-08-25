@@ -15,3 +15,13 @@ const menuPopup = new Popup({
 });
 
 menuPopup.listen();
+
+const aboutPopup = new Popup({
+  btnOpen: document.querySelector('[data-popup="open-about"]'),
+  htmlContent: `
+    <h1 class="popup__title">Об игре:</h1>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur debitis facilis omnis ea aspernatur sit assumenda in, iste illum eveniet!</p>
+    `,
+});
+
+aboutPopup.listen();
