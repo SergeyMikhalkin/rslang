@@ -18,9 +18,10 @@
     position: relative
     width: 100%
     max-width: 490px
+    height: 1px
     min-height: 600px
     padding: 50px 35px
-    background-color: yellow
+    background-color: #33BBBA
     text-align: center
 
     opacity: 0
@@ -28,10 +29,15 @@
     @at-root .popup.is-visible &
       opacity: 1
 
+  &__content
+    height: 100%
+    padding: 28px
+    border: 1px solid #EFEFEF
+
   &__btn-close
     position: absolute
-    right: 0
     top: 0
+    right: 0
     transform: translate(50%, -50%)
 
     display: block
@@ -40,5 +46,42 @@
     background: url('./assets/popup/btn-close.png') no-repeat center/contain
     cursor: pointer
 
+    @include phone
+      left: 0
+      top: -50px
+      margin: 0 auto
+      transform: none
+
     &:hover
       background-size: 80%
+
+  &__title
+    margin-bottom: 40px
+
+    font-style: normal
+    font-weight: 700
+    font-size: 48px
+    line-height: 60px
+    text-align: center
+    color: #fff
+
+  &__list
+    display: flex
+    flex-direction: column
+    color: inherit
+    text-align: left
+    &-item
+      position: relative
+      margin-bottom: 11px
+      padding-left: 58px
+      background: url(./assets/popup/menu-item-icon.png) no-repeat left / 40px 40px
+
+      font-weight: 700
+      font-size: 24px
+      line-height: 30px
+      text-decoration: none
+      color: #fff
+      transition: all 150ms
+
+      &:hover
+        text-decoration: underline
