@@ -250,3 +250,35 @@ export const setStatistics = async (statistics: { statistics: string }) => {
   if (rawResponse.status !== 200) throw Error();
   return rawResponse.json();
 };
+
+//Users/Setting
+export const getSettings = async () => {
+  // const authData = getLocalStorage(key) // authData.token // взять переменную с localStorage
+  const rawResponse = await fetch(`https://https://rslang-data.herokuapp.com/users/${authData.userId}/settings`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${authData.token}`,
+      Accept: 'application/json',
+    },
+  });
+  if (rawResponse.status !== 200) throw Error();
+  return rawResponse.json();
+};
+
+export const setSettings = async (data: { wordsPerDay: number; optional: /* ! */ { optional: string } }) => {
+  /* ! Создать интерфейс для optional */
+  // const authData = getLocalStorage(key) // authData.token // взять переменную с localStorage
+  const rawResponse = await fetch(`https://rslang-data.herokuapp.com/users/${authData.userId}/settings`, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${authData.token}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+  if (rawResponse.status !== 200) {
+    return Promise.reject(rawResponse.status);
+  }
+  return rawResponse.json();
+};
