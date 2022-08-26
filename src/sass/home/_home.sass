@@ -1,0 +1,35 @@
+@import './_home-list'
+
+.home-page
+  display: flex
+  flex-direction: column
+  justify-content: start
+
+  max-width: 768px
+  height: 100%
+  margin: 0 auto
+  padding: 0 25px
+  box-sizing: border-box
+  *
+    box-sizing: border-box
+
+  @include tablet
+    padding: 0 58px
+
+.home-content
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: start
+
+  margin: 0 auto
+  padding-top: 59px
+
+  @include tablet
+    width: 407px
+    align-items: flex-start
+
+.home-pic
+  margin-bottom: 49px
+  width: 100%
+  max-width: 392px
