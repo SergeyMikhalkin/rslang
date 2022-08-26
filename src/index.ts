@@ -1,3 +1,3 @@
 import './style.sass';
 
-import './js/home';
+import './js/home/home';
