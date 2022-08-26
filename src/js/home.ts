@@ -1,4 +1,5 @@
 import Popup from './components/popup';
+import Tabs from './components/tabs';
 
 const menuPopup = new Popup({
   btnOpen: document.querySelector('[data-popup="menu-open-button"]'),
@@ -29,29 +30,32 @@ aboutPopup.listen();
 const authPopup = new Popup({
   btnOpen: document.querySelector('[data-popup="open-auth-form"]'),
   htmlContent: `
-    <h1 class="popup__title">Вход:</h1>
-    <div class="form-tab is-visible" data-form-tab="authorization">
+    <h1 class="popup__title">Welcome!</h1>
+
+    <div class="tab-container form-tab is-active" data-tab="authorization">
     <form class="auth-form">
-    <input type="email" class="auth-form__field" placeholder="Ваш email ...">
-    <input type="password" class="auth-form__field" placeholder="Ваш пароль ...">
+    <input type="email" required class="auth-form__field" placeholder="Ваш email ...">
+    <input type="password" required class="auth-form__field" placeholder="Ваш пароль ...">
     <button class="auth-form__btn">Отправить</button>
     </form>
     </div>
     
-    <div class="form-tab" data-form-tab="registration">
+    <div class="tab-container form-tab" data-tab="registration">
     <form class="auth-form">
-    <input type="text" class="auth-form__field" placeholder="Ваше имя ...">
-    <input type="email" class="auth-form__field" placeholder="Ваш email ...">
-    <input type="password" class="auth-form__field" placeholder="Ваш пароль ...">
+    <input type="text" required class="auth-form__field" placeholder="Ваше имя ...">
+    <input type="email" required class="auth-form__field" placeholder="Ваш email ...">
+    <input type="password" minlength=8 required class="auth-form__field" placeholder="Ваш пароль ...">
     <button class="auth-form__btn">Отправить</button>
     </form>
 
     </div>
     <div class="form-tab-togglers">
-    <span class="form-tab__toggler is-active" data-form-tab="open-auth-form">Авторизация</span> | 
-    <span class="form-tab__toggler" data-form-tab="open-registr-form">Регистрирация</span>
+    <span class="form-tab__toggler tab-btn is-active" data-open-tab="authorization">Авторизация</span> | 
+    <span class="form-tab__toggler tab-btn" data-open-tab="registration">Регистрирация</span>
     </div>
   `,
 });
 
 authPopup.listen();
+
+Tabs.listen();
