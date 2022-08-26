@@ -21,7 +21,9 @@ const aboutPopup = new Popup({
   btnOpen: document.querySelector('[data-popup="open-about"]'),
   htmlContent: `
     <h1 class="popup__title">Об игре:</h1>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur debitis facilis omnis ea aspernatur sit assumenda in, iste illum eveniet!</p>
+    <p>Перед Вами приложение RS-lang для изучения иностранных слов, включающее электронный учебник с базой слов для изучения, мини-игры для их повторения, страницу статистики для отслеживания индивидуального прогресса.</p>
+    <p><strong>Let's jump right in :)</strong></p>
+    <img class="popup__about-pic" src="./assets/popup/about.png"/>
     `,
 });
 
