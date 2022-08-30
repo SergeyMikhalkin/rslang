@@ -29,6 +29,10 @@ export const createUser = async (user: User) => {
     },
     body: JSON.stringify(user),
   });
+  if (rawResponse.status === 417) {
+    alert('Пользователь с таким e-mail уже существует');
+    throw Error('Пользователь с таким e-mail уже существует');
+  }
   if (!rawResponse.ok) throw Error(`Error${rawResponse.status}`);
   return rawResponse.json();
 };
@@ -258,6 +262,10 @@ export const sigIn = async (user: SignInUser) => {
     },
     body: JSON.stringify(user),
   });
+  if (rawResponse.status == 404) {
+    alert(`Такого пользователя не существует. Проверьте правильность ввода логина и пароля`);
+    throw Error(`Такого пользователя не существует. Проверьте правильность ввода логина и пароля`);
+  }
   if (!rawResponse.ok) throw Error(`Error${rawResponse.status}`);
   const authData = (await rawResponse.json()) as Auth;
   setLocalStorage('auth', authData);
