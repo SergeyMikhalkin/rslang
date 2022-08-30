@@ -12,7 +12,7 @@ const htmlContent: htmlContentType = {
     <a href="" class="popup__list-item">Учебник</a>
     <a href="" class="popup__list-item">Аудиовызов</a>
     <a href="" class="popup__list-item">Спринт</a>
-    <a href="" class="popup__list-item">Статистика</a>
+    <a href="./statsPage" class="popup__list-item">Статистика</a>
     </nav>`,
   about: `
     <h1 class="popup__title">Об игре:</h1>
