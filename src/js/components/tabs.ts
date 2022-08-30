@@ -26,7 +26,6 @@ class Tabs {
   }
 
   static toggleNavButtons(targetBtn: HTMLElement) {
-    // console.log(currentBtn);
     const parent = targetBtn.parentElement as HTMLElement;
     const currentBtn = parent.querySelector('[data-open-tab].is-active');
 

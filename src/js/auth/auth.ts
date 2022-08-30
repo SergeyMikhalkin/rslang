@@ -1,48 +1,102 @@
-import { createUser, sigIn } from '../api/api';
+import { createUser, sigIn as signIn } from '../api/api';
+import { SignInUser } from '../interfaces/sign-in-user';
+import { User } from '../interfaces/user';
+import { Auth } from '../interfaces/auth';
+import { setLocalStorage, getLocalStorage, removeLocalStorage } from '../local-storage/local-storage';
 
-export const auth = async (wrapper: HTMLFormElement) => {
-  const email = wrapper.email as HTMLInputElement;
-  const password = wrapper.password as HTMLInputElement;
-  const values = {
-    email: email.value,
-    password: password.value,
-  };
-  await sigIn(values);
-};
+import { authPopup } from '../header/header';
 
-document.addEventListener('submit', (event) => {
-  event.preventDefault();
-  const el = event.target as HTMLElement;
-  const authForm = el.closest('#auth-form') as HTMLFormElement;
-  if (!authForm) return;
-  void auth(authForm);
-});
+class UserAuth {
+  userButton;
+  constructor() {
+    this.userButton = document.querySelector('.header__btn--user') as HTMLElement;
 
-export const regist = async (wrapper: HTMLFormElement) => {
-  const name = wrapper.text as HTMLInputElement;
-  const email = wrapper.email as HTMLInputElement;
-  const password = wrapper.password as HTMLInputElement;
-  // даные для регистрации создания User
-  const values = {
-    name: name.value,
-    email: email.value,
-    password: password.value,
-  };
-  // даные для регистрации
-  const valuesSigIn = {
-    email: email.value,
-    password: password.value,
-  };
-  await createUser(values); // создали user
-  void sigIn(valuesSigIn); // залогиниться сразу
-  // закрыть окно регистрации
-  // добавить иконке какой нибудь стиль для отображения что User залогинился
-};
+    // click 'logout'
+    this.userButton.addEventListener('click', () => {
+      if (this.userButton.classList.contains('is-authorized')) {
+        this.logOut();
+      }
+    });
 
-document.addEventListener('submit', (event) => {
-  event.preventDefault();
-  const el = event.target as HTMLElement;
-  const registForm = el.closest('#regist-form') as HTMLFormElement;
-  if (!registForm) return;
-  void regist(registForm);
-});
+    document.addEventListener('submit', (ev) => {
+      ev.preventDefault();
+      const { target } = ev;
+      if (target instanceof HTMLElement) {
+        const formElem = target.closest('form') as HTMLFormElement;
+        this.hideError(formElem);
+
+        if (formElem.id === 'auth-form') {
+          this.logIn(formElem);
+          return;
+        }
+        if (formElem.id === 'regist-form') {
+          this.registration(formElem);
+          return;
+        }
+      }
+    });
+  }
+
+  getFormData(formElem: HTMLFormElement) {
+    const formData = new FormData(formElem);
+    const data = Object.fromEntries(formData.entries());
+    return data;
+  }
+
+  toggleButtonState() {
+    if (this.userButton instanceof HTMLElement) {
+      this.userButton.classList.toggle('is-authorized');
+    }
+  }
+
+  logIn(formElem: HTMLFormElement) {
+    const data = this.getFormData(formElem);
+    signIn((data as unknown) as SignInUser)
+      .then((body: Auth) => {
+        authPopup.close(); // close popup
+        setLocalStorage('auth', body); // write localStorage
+        this.toggleButtonState(); // toggle state
+      })
+      .catch((err) => {
+        console.log(err);
+        this.showError('Неверно указан email или пароль.', formElem);
+      });
+  }
+
+  registration(formElem: HTMLFormElement) {
+    const data = this.getFormData(formElem);
+    createUser((data as unknown) as User)
+      .then(() => {
+        const userData = { email: data.email as string, password: data.password as string };
+        return signIn(userData);
+      })
+      .then((data: Auth) => {
+        authPopup.close(); // close popup
+        setLocalStorage('auth', data); // write localStorage
+        this.toggleButtonState(); // toggle state
+      })
+      .catch((err) => {
+        console.log(err);
+        this.showError('Указанный email занят другим пользователем', formElem);
+      });
+  }
+
+  logOut() {
+    removeLocalStorage('auth');
+    this.toggleButtonState();
+  }
+
+  showError(message: string, formElem: HTMLFormElement) {
+    const errorElem = formElem.querySelector('.auth-form__error') as HTMLElement;
+    // errorElem.classList.add('is-visible');
+    errorElem.textContent = message;
+  }
+
+  hideError(formElem: HTMLFormElement) {
+    const errorElem = formElem.querySelector('.auth-form__error') as HTMLElement;
+    // errorElem.classList.remove('is-visible');
+    errorElem.textContent = '';
+  }
+}
+
+const auth = new UserAuth();

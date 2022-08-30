@@ -28,6 +28,7 @@ const htmlContent: htmlContentType = {
     <input type="email" name="email" required class="auth-form__field" placeholder="Ваш email ...">
     <input type="password" name="password" minlength=8 required class="auth-form__field" placeholder="Ваш пароль ...">
     <button class="auth-form__btn" id="auth-form__btn">Отправить</button>
+    <p class="auth-form__error"></p>
     </form>
     </div>
     
@@ -37,6 +38,7 @@ const htmlContent: htmlContentType = {
     <input type="email" name="email" required class="auth-form__field" placeholder="Ваш email ..." id="regist__email">
     <input type="password" name="password" minlength=8 required class="auth-form__field" placeholder="Ваш пароль ..." id=regist__password">
     <button class="auth-form__btn" id="regist-form__btn">Отправить</button>
+    <p class="auth-form__error"></p>
     </form>
     
     </div>

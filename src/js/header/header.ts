@@ -14,7 +14,7 @@ const aboutPopup = new Popup({
 });
 aboutPopup.listen();
 
-const authPopup = new Popup({
+export const authPopup = new Popup({
   btnOpen: document.querySelector('[data-popup="open-auth-form"]'),
   htmlContent: htmlContent.auth,
 });

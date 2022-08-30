@@ -37,7 +37,13 @@ class Popup {
   }
 
   listen() {
-    if (this.btnOpen) this.btnOpen.addEventListener('click', this.open.bind(this));
+    if (this.btnOpen instanceof HTMLElement) {
+      const btn = this.btnOpen;
+      this.btnOpen.addEventListener('click', () => {
+        const isAuthorized = btn.classList.contains('is-authorized');
+        if (!isAuthorized) this.open();
+      });
+    }
     this.btnClose.addEventListener('click', this.close.bind(this));
   }
 

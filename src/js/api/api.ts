@@ -259,6 +259,5 @@ export const sigIn = async (user: SignInUser) => {
     body: JSON.stringify(user),
   });
   if (!rawResponse.ok) throw Error(`Error${rawResponse.status}`);
-  const authData = (await rawResponse.json()) as Auth;
-  setLocalStorage('auth', authData);
+  return rawResponse.json();
 };
