@@ -88,13 +88,11 @@ class UserAuth {
 
   showError(message: string, formElem: HTMLFormElement) {
     const errorElem = formElem.querySelector('.auth-form__error') as HTMLElement;
-    // errorElem.classList.add('is-visible');
     errorElem.textContent = message;
   }
 
   hideError(formElem: HTMLFormElement) {
     const errorElem = formElem.querySelector('.auth-form__error') as HTMLElement;
-    // errorElem.classList.remove('is-visible');
     errorElem.textContent = '';
   }
 }
