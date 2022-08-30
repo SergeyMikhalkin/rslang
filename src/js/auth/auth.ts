@@ -1,6 +1,6 @@
 import { createUser, sigIn } from '../api/api';
 import { authPopup } from '../header/header';
-// import { Auth } from '../interfaces/auth';
+// import { getLocalStorage } from '../local-storage/local-storage';
 
 export const auth = async (wrapper: HTMLFormElement) => {
   const email = wrapper.email as HTMLInputElement;
@@ -12,6 +12,8 @@ export const auth = async (wrapper: HTMLFormElement) => {
   await sigIn(values);
   authPopup.close();
   // добавить иконке какой нибудь стиль для отображения что User залогинился
+  // при нажатии на иконку логина при непустом LocalStorage('auth') не открывать popap регистрации
+  // добавить кнопку выхода из аккаунта
 };
 
 document.addEventListener('submit', (event) => {
@@ -40,10 +42,11 @@ export const regist = async (wrapper: HTMLFormElement) => {
   void (await sigIn(valuesSigIn));
   authPopup.close();
 
-  // const user = JSON.parse(localStorage.getItem('auth')!) as Auth;
+  // const user = getLocalStorage('auth');
   // console.log(user);
   // console.log(user.name);
   // console.log(user.massage);
+
   // добавить иконке какой нибудь стиль для отображения что User залогинился
 };
 
