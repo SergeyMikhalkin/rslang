@@ -1,0 +1,65 @@
+@import './start'
+@import './results'
+
+.audioCall
+  display: flex
+  flex-direction: column
+  align-items: center
+  margin: 0 auto
+
+.audioCall
+  height: 100%
+  justify-content: center
+  align-items: center
+
+  &__img-container
+    width: 100%
+    max-width: 300px
+    aspect-ratio: 390/260
+    margin-bottom: 20px
+    background-color: rgba(#000, 0.01)
+    // border: 1px dashed #80E55D
+
+  &__wordImg
+    opacity: 1
+    transition: all 500ms
+    &.is-hidden
+      opacity: 0
+
+  &__player
+    margin-bottom: 20px
+
+  &__wordTranslate
+    position: relative
+    margin: 0 0 50px 0
+    padding: 0 1em
+    font-weight: bold
+    letter-spacing: 2px
+    font-size: 1.3rem
+    line-height: 1
+    font-style: italic
+    color: #F27A31
+    transition: all 500ms
+    letter-spacing: 0px
+    background: #fff
+    &.is-hidden
+      border-radius: 10px
+      user-select: none
+      overflow: hidden
+      background: #F27A31
+
+  &__words
+    display: flex
+    justify-content: center
+    gap: 0 15px
+    margin: 20px 0
+  
+  &__label
+    flex: 0 0
+    display: flex
+    flex-direction: column
+    align-items: center
+    cursor: pointer
+    text-align: center
+  // &__radio
+  // &__word-spelling

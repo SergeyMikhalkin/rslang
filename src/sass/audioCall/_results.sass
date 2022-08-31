@@ -1,0 +1,73 @@
+.audioCall__result
+  width: 100%
+  max-width: 470px
+
+  &-title
+    margin-bottom: 50px
+    font-weight: 700
+    font-size: 32px
+    line-height: 40px
+    text-align: center
+
+  &-list
+    display: flex
+    flex-wrap: wrap
+    gap: 20px
+
+  &-item
+    display: flex
+    flex-wrap: wrap
+    align-items: center
+    gap: 25px
+    width: 100%
+  &-audio-wrapper
+    flex: none
+    width: 40px
+    height: 40px
+    border-radius: 50%
+    background: url('./assets/audioCall/sound.png') no-repeat center/ contain
+    cursor: pointer
+  &-audio
+    width: 100%
+    height: 100%
+    visibility: hidden
+  &-word
+    display: flex
+    flex-direction: column
+    align-items: start
+    margin-right: auto
+
+    font-weight: 700
+    font-size: 20px
+    line-height: 25px
+    color: #F27A31
+  &-word-translate
+    font-size: 0.7em
+    color: #000
+
+  &-stat
+    position: relative
+    width: 60px
+    padding: 3px 0
+    font-weight: 700
+    font-size: 20px
+    line-height: 25px
+    text-align: center
+    &::before
+      content: ''
+      display: block
+      position: absolute
+      top: 0
+      transform: translateY(-90%)
+      width: 100%
+      text-align: center
+      font-size: 13px
+      line-height: 1
+  &-corrects
+    border-bottom: 3px solid #80E55D
+    &::before
+      content: 'correct'
+  &-wrongs
+    border-bottom: 3px solid #E55D96
+    &::before
+      content: 'wrong'

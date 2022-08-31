@@ -1,0 +1,40 @@
+@import 'normalize.css'
+// common
+@import './sass/reset'
+@import './sass/mixin/_breakpoints'
+@import './sass/components/menu'
+@import './sass/components/header'
+@import './sass/components/footer'
+@import './sass/components/popup'
+@import './sass/components/tabs'
+@import './sass/components/form'
+
+// page
+@import './sass/home/home'
+@import './sass/audioCall/audioCall'
+
+html
+  height: 100%
+
+body
+  width: 100%
+  min-width: 320px
+  overflow-x: hidden
+  font-family: 'Bellota', cursive
+  color: #000
+
+.audioCall-page
+  display: flex
+  flex-direction: column
+  justify-content: start
+
+  max-width: 980px
+  height: 100%
+  margin: 0 auto
+  padding: 0 25px
+  box-sizing: border-box
+  *
+    box-sizing: border-box
+
+  @include tablet
+    padding: 0 58px

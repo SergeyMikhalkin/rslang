@@ -3,7 +3,7 @@ import { SignInUser } from '../interfaces/sign-in-user';
 import { User } from '../interfaces/user';
 import { getLocalStorage, setLocalStorage } from '../local-storage/local-storage';
 
-const base = `https://rslang-data.herokuapp.com`;
+export const base = `https://rslang-data.herokuapp.com`;
 
 export const getChunkWords = async (page: number, group: number) => {
   const url = `${base}/words?page=${page}&group=${group}`;
