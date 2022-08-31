@@ -2,7 +2,7 @@ import { createUser, sigIn as signIn } from '../api/api';
 import { SignInUser } from '../interfaces/sign-in-user';
 import { User } from '../interfaces/user';
 import { Auth } from '../interfaces/auth';
-import { setLocalStorage, removeLocalStorage } from '../local-storage/local-storage';
+import { setLocalStorage, removeLocalStorage, getLocalStorage } from '../local-storage/local-storage';
 
 import { authPopup } from '../header/header';
 
@@ -97,5 +97,5 @@ class UserAuth {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const auth = new UserAuth();
+if (getLocalStorage('auth')) auth.toggleButtonState();
