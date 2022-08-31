@@ -14,6 +14,17 @@
     color: #fff
     background-color: #F27A31
 
+  &__error
+    min-height: 30px
+    margin-bottom: 40px
+    padding: 18px 0 18px 50px
+
+    border-bottom: 2px solid #F27A31
+    background: url('./assets/popup/error.png') no-repeat left 0px / auto 34px
+    text-align: left
+    &:empty
+      display: none
+
 .form-tab
   &__toggler
     &:not(.is-active)

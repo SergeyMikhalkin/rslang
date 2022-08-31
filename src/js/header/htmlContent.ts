@@ -24,19 +24,21 @@ const htmlContent: htmlContentType = {
     <h1 class="popup__title">Welcome!</h1>
     
     <div class="tab-container form-tab is-active" data-tab="authorization">
-    <form class="auth-form">
-    <input type="email" required class="auth-form__field" placeholder="Ваш email ...">
-    <input type="password" required class="auth-form__field" placeholder="Ваш пароль ...">
-    <button class="auth-form__btn">Отправить</button>
+    <form class="auth-form" id="auth-form">
+    <input type="email" name="email" required class="auth-form__field" placeholder="Ваш email ...">
+    <input type="password" name="password" minlength=8 required class="auth-form__field" placeholder="Ваш пароль ...">
+    <button class="auth-form__btn" id="auth-form__btn">Отправить</button>
+    <p class="auth-form__error"></p>
     </form>
     </div>
     
     <div class="tab-container form-tab" data-tab="registration">
-    <form class="auth-form">
-    <input type="text" required class="auth-form__field" placeholder="Ваше имя ...">
-    <input type="email" required class="auth-form__field" placeholder="Ваш email ...">
-    <input type="password" minlength=8 required class="auth-form__field" placeholder="Ваш пароль ...">
-    <button class="auth-form__btn">Отправить</button>
+    <form class="auth-form" id="regist-form">
+    <input type="text" name="text" required class="auth-form__field" placeholder="Ваше имя ..." id="regist__name">
+    <input type="email" name="email" required class="auth-form__field" placeholder="Ваш email ..." id="regist__email">
+    <input type="password" name="password" minlength=8 required class="auth-form__field" placeholder="Ваш пароль ..." id=regist__password">
+    <button class="auth-form__btn" id="regist-form__btn">Отправить</button>
+    <p class="auth-form__error"></p>
     </form>
     
     </div>
