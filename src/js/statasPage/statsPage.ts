@@ -6,8 +6,8 @@ const renderStatsPage = () => {
 <table class="stats__table" aria-label="customized table">
   <thead class="">
     <tr class="">
-      <th class="stats__th" scope="col">Игра</th>
-      <th class="stats__th " scope="col">Изучено слов</th>
+      <th class="stats__th" scope="col"></th>
+      <th class="stats__th " scope="col">Изучено новых слов</th>
       <th class="stats__th" scope="col">Правильно&nbsp;(%)</th>
       <th class="stats__th" scope="col">Самая длинная серия</th>
     </tr>
@@ -26,7 +26,7 @@ const renderStatsPage = () => {
       <td class="stats__th stats__longest_streak_sprint">${0}</td>
     </tr>
     <tr class="stats__game_all">
-      <th class="" role="cell" scope="row">Всего</th>
+      <th class="" role="cell" scope="row">Слова</th>
       <td class="stats__th stats__learned_word_all">${0}</td>
       <td class="stats__th stats__accuracy_all">${'0%'}</td>
       <td class="stats__th"></td>
