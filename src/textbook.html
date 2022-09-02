@@ -12,6 +12,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Bellota:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
     rel="stylesheet">
+  <link rel="shortcut icon" href="#">
 </head>
 
 <body class="home-page">
@@ -24,24 +25,23 @@
 
   <!-- MAIN -->
   <main class="e-book__content">
-    <div class="e-book__nav">
-      <div class="dropdown">
-        <button class="dropbtn">Выберите сложность</button>
-        <div class="dropdown-content">
-          <a href="#">Link 1</a>
-          <a href="#">Link 2</a>
-          <a href="#">Link 3</a>
-        </div>
+    <div class="e-book__navigation">
+      <div class="nav__group">
+        <span>Группа</span>
+        <select class="nav__group-select"></select>
       </div>
-      <div class="dropdown">
-        <button class="dropbtn">Страница</button>
-        <div class="dropdown-content">
-          <a href="#">Link 1</a>
-          <a href="#">Link 2</a>
-          <a href="#">Link 3</a>
-        </div>
+      <div class="nav__page">
+        <span>Страница</span>
+        <select class="nav__page-select"></select>
+      </div>
+      <div class="game-btn">
+        <button>Спринт</button>
+      </div>
+      <div class="game-btn">
+        <button>Аудиовызов</button>
       </div>
     </div>
+    <div class="words__container" id="words__container"></div>
   </main>
 
   <!-- FOOTER -->

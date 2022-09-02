@@ -35,8 +35,8 @@ const playAudio = (audio1: HTMLAudioElement, audio2: HTMLAudioElement, audio3: H
 
 const htmlBookContent = (objWord: ResponseWord) => {
   const url = `https://rslang-data.herokuapp.com/`;
-  const eBookPage = `
-    <div class="text-book__wrapper">
+  const cardTemplate = `
+    <div class="word-card__wrapper">
     <div class="word-card" id="${objWord.id}">
       <div class="card__img">
         <img class="card__image" src="${url}${objWord.image}" alt="${objWord.word}">
@@ -65,20 +65,20 @@ const htmlBookContent = (objWord: ResponseWord) => {
     </div>
     </div>`;
 
-  const wordCar = document.createElement('div');
-  wordCar.innerHTML = eBookPage;
+  const wordCard = document.createElement('div');
+  wordCard.innerHTML = cardTemplate;
+
+  const wordsCard = document.getElementById('words__container');
+  wordsCard && wordsCard.append(wordCard);
 
   const audio1 = new Audio(`${url}${objWord.audio}`);
   const audio2 = new Audio(`${url}${objWord.audioMeaning}`);
   const audio3 = new Audio(`${url}${objWord.audioExample}`);
+  const audioBtn = wordCard.querySelector('.card-word__btn-sound');
+  wordCard.append(audio1);
+  wordCard.append(audio2);
+  wordCard.append(audio3);
 
-  wordCar.append(audio1);
-  wordCar.append(audio2);
-  wordCar.append(audio3);
-
-  const eBookContent = document.querySelector('.e-book__content');
-  if (eBookContent) eBookContent.insertAdjacentElement('beforeend', wordCar);
-  const audioBtn = wordCar.querySelector('.card-word__btn-sound');
   audioBtn &&
     audioBtn.addEventListener('click', () => {
       void stopAudio(allAudioTags);
@@ -88,9 +88,45 @@ const htmlBookContent = (objWord: ResponseWord) => {
 
 const renderWordsPage = async (page = 0, group = 0) => {
   const wordArr = (await getChunkWords(page, group)) as [ResponseWord];
+  const wordsCard = document.getElementById('words__container');
+  if (wordsCard) wordsCard.innerHTML = '';
   wordArr.forEach((word) => {
     htmlBookContent(word);
   });
   allAudioTags = document.querySelectorAll('audio');
 };
+
+const createPageNamber = () => {
+  const select = document.querySelector('.nav__page-select') as HTMLSelectElement;
+  for (let index = 0; index < 30; index++) {
+    const option = document.createElement('option');
+    option.value = String(index);
+    option.textContent = String(index + 1);
+    select?.append(option);
+  }
+};
+const createGroupNamber = () => {
+  const select = document.querySelector('.nav__group-select') as HTMLSelectElement;
+  for (let index = 0; index < 6; index++) {
+    const option = document.createElement('option');
+    option.value = String(index);
+    option.textContent = String(index + 1);
+    select?.append(option);
+  }
+};
+
+const selectGroupAndPage = () => {
+  const selectGroup = document.querySelector('.nav__group-select') as HTMLSelectElement;
+  selectGroup.addEventListener('change', () => {
+    void renderWordsPage(Number(selectPage.value), Number(selectGroup.value));
+  });
+
+  const selectPage = document.querySelector('.nav__page-select') as HTMLSelectElement;
+  selectPage.addEventListener('change', () => {
+    void renderWordsPage(Number(selectPage.value), Number(selectGroup.value));
+  });
+};
+createGroupNamber();
+createPageNamber();
+selectGroupAndPage();
 void renderWordsPage();
