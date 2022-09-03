@@ -119,7 +119,7 @@ const createPageNamber = () => {
 
 const createGroupNamber = () => {
   const select = document.querySelector('.nav__group-select') as HTMLSelectElement;
-  for (let index = 0; index < 6; index++) {
+  for (let index = 0; index < 7; index++) {
     const option = document.createElement('option');
     option.value = String(index);
     option.textContent = String(index + 1);
