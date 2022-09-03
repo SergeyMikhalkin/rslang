@@ -8,7 +8,7 @@ export class SprintGame {
   private static _currIndex: number;
   private static _currCoefficient: number;
   private static _correctAnswersInRow: number;
-  private static _timerId: NodeJS.Timeout | undefined;
+  private static _timerId: number;
 
   static start(group: number, page = -1) {
     this._score = 0;
@@ -16,7 +16,7 @@ export class SprintGame {
     this._currIndex = 0;
     this._currCoefficient = 1;
     this._correctAnswersInRow = 1;
-    this._timerId = undefined;
+    this._timerId = -1;
 
     this.addEventListeners();
 
@@ -105,7 +105,7 @@ export class SprintGame {
   }
 
   static startTimer(): void {
-    this._timerId = setInterval(() => {
+    this._timerId = window.setInterval(() => {
       const countdown = document.querySelector('.sprint__count-down');
       let currSec = -1;
       if (countdown) {

@@ -64,7 +64,7 @@ const baseConfig = {
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './src/sprint.html'),
-      filename: 'sprint',
+      filename: 'sprint.html',
       chunks: ['sprint'],
     }),
     new CleanWebpackPlugin({
