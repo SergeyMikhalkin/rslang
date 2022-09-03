@@ -1,4 +1,6 @@
 import { getChunkWords } from '../api/api';
+import { PageAndGroup } from '../interfaces/pageAndGroup';
+import { getLocalStorage, setLocalStorage } from '../local-storage/local-storage';
 
 interface ResponseWord {
   id: string;
@@ -105,6 +107,7 @@ const createPageNamber = () => {
     select?.append(option);
   }
 };
+
 const createGroupNamber = () => {
   const select = document.querySelector('.nav__group-select') as HTMLSelectElement;
   for (let index = 0; index < 6; index++) {
@@ -116,17 +119,35 @@ const createGroupNamber = () => {
 };
 
 const selectGroupAndPage = () => {
-  const selectGroup = document.querySelector('.nav__group-select') as HTMLSelectElement;
-  selectGroup.addEventListener('change', () => {
-    void renderWordsPage(Number(selectPage.value), Number(selectGroup.value));
-  });
+  const data = getLocalStorage('selectGroupAndPage') as PageAndGroup;
 
   const selectPage = document.querySelector('.nav__page-select') as HTMLSelectElement;
+  if (data) selectPage.selectedIndex = +data.page;
   selectPage.addEventListener('change', () => {
     void renderWordsPage(Number(selectPage.value), Number(selectGroup.value));
+    setLocalStorage('selectGroupAndPage', {
+      page: selectPage.value,
+      group: selectGroup.value,
+    });
+  });
+
+  const selectGroup = document.querySelector('.nav__group-select') as HTMLSelectElement;
+  if (data) selectGroup.selectedIndex = +data.group;
+  selectGroup.addEventListener('change', () => {
+    void renderWordsPage(Number(selectPage.value), Number(selectGroup.value));
+    setLocalStorage('selectGroupAndPage', {
+      page: selectPage.value,
+      group: selectGroup.value,
+    });
   });
 };
-createGroupNamber();
-createPageNamber();
-selectGroupAndPage();
-void renderWordsPage();
+
+const initEbookPage = () => {
+  const data = getLocalStorage('selectGroupAndPage') as PageAndGroup;
+  createGroupNamber();
+  createPageNamber();
+  selectGroupAndPage();
+  data ? void renderWordsPage(+data.page, +data.group) : void renderWordsPage();
+};
+
+initEbookPage();
