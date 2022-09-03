@@ -112,7 +112,7 @@ const createPageNamber = () => {
   for (let index = 0; index < 30; index++) {
     const option = document.createElement('option');
     option.value = String(index);
-    option.textContent = String(index + 1);
+    option.textContent = `Страница ${String(index + 1)}`;
     select?.append(option);
   }
 };
@@ -122,7 +122,11 @@ const createGroupNamber = () => {
   for (let index = 0; index < 7; index++) {
     const option = document.createElement('option');
     option.value = String(index);
-    option.textContent = String(index + 1);
+    if (index == 6) {
+      option.textContent = `Группа ${String(index + 1)} Сложные слова`;
+    } else {
+      option.textContent = `Группа ${String(index + 1)}`;
+    }
     select?.append(option);
   }
 };
