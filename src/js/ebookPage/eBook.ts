@@ -46,19 +46,23 @@ const htmlBookContent = (objWord: ResponseWord) => {
       <div class="card-word__title-content">
         <h2 class="card-word__title">${objWord.word} - ${objWord.transcription} - ${objWord.wordTranslate}</h2>
         <div class="card-word__sentence">
-          <p>${objWord.textMeaning} - ${objWord.textMeaningTranslate}</p>
+          <p class="card-word__sub-title">${objWord.textMeaning} - ${objWord.textMeaningTranslate}</p>
         </div>
         <div class="card-word__example">
-          <p>${objWord.textExample} - ${objWord.textExampleTranslate}</p>
+          <p class="card-word__sub-title">${objWord.textExample} - ${objWord.textExampleTranslate}</p>
         </div>
         <div class="card-word__sound">
-          <button type="button" class="card-word__btn-sound" aria-label="Listen audio">
-            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" aria-hidden="true"
-              focusable="false" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M12 1c-4.97 0-9 4.03-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7c0-4.97-4.03-9-9-9z">
-              </path>
+          <button type="button" class="card-word__btn-sound paly_sound" aria-label="Listen audio">
+          <span class="">
+            <svg class="" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path>
             </svg>
+          </span>
+          </button>
+          <button type="button" class="card-word__btn-sound stop_sound" aria-label="Listen audio">
+            <span class="">
+              <svg class="" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6h12v12H6z"></path>
+              </svg>
+            </span>
           </button>
         </div>
         <button type="button" class="" data-word="" data-name="complex">Сложное слово</button>
@@ -76,15 +80,20 @@ const htmlBookContent = (objWord: ResponseWord) => {
   const audio1 = new Audio(`${url}${objWord.audio}`);
   const audio2 = new Audio(`${url}${objWord.audioMeaning}`);
   const audio3 = new Audio(`${url}${objWord.audioExample}`);
-  const audioBtn = wordCard.querySelector('.card-word__btn-sound');
+  const playAudioBtn = wordCard.querySelector('.paly_sound');
   wordCard.append(audio1);
   wordCard.append(audio2);
   wordCard.append(audio3);
 
-  audioBtn &&
-    audioBtn.addEventListener('click', () => {
+  playAudioBtn &&
+    playAudioBtn.addEventListener('click', () => {
       void stopAudio(allAudioTags);
       void playAudio(audio1, audio2, audio3);
+    });
+  const stopAudioBtn = wordCard.querySelector('.stop_sound');
+  stopAudioBtn &&
+    stopAudioBtn.addEventListener('click', () => {
+      void stopAudio(allAudioTags);
     });
 };
 
