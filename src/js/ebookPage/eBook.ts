@@ -121,6 +121,7 @@ const selectGroupAndPage = () => {
   const selectPage = document.querySelector('.nav__page-select') as HTMLSelectElement;
   if (data) selectPage.selectedIndex = +data.page;
   selectPage.addEventListener('change', () => {
+    createLinks();
     void renderWordsPage(Number(selectGroup.value), Number(selectPage.value));
     setLocalStorage('selectGroupAndPage', {
       group: selectGroup.value,
@@ -131,6 +132,7 @@ const selectGroupAndPage = () => {
   const selectGroup = document.querySelector('.nav__group-select') as HTMLSelectElement;
   if (data) selectGroup.selectedIndex = +data.group;
   selectGroup.addEventListener('change', () => {
+    createLinks();
     void renderWordsPage(Number(selectGroup.value), Number(selectPage.value));
     setLocalStorage('selectGroupAndPage', {
       group: selectGroup.value,
@@ -147,4 +149,22 @@ const initEbookPage = () => {
   data ? void renderWordsPage(+data.group, +data.page) : void renderWordsPage();
 };
 
+const createLinks = () => {
+  let group = 0;
+  let page = 0;
+
+  const groupElem = document.querySelector('.nav__group-select') as HTMLSelectElement;
+  if (groupElem) group = Number(groupElem.value);
+
+  const pageElem = document.querySelector('.nav__page-select') as HTMLSelectElement;
+  if (pageElem) page = Number(pageElem.value);
+
+  const sprintBtn = document.querySelector('.e-book__btn-sprint') as HTMLLinkElement;
+  if (sprintBtn) sprintBtn.href = `./sprint.html?group=${group}&page=${page}`;
+
+  const audioBtn = document.querySelector('.e-book__btn-audio') as HTMLLinkElement;
+  if (audioBtn) audioBtn.href = `./audio.html?group=${group}&page=${page}`;
+};
+
 initEbookPage();
+createLinks();
