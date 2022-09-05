@@ -60,8 +60,10 @@ class Game extends Step {
   showTips() {
     const imgEl = this.wrapper.querySelector('.audioCall__wordImg') as HTMLImageElement;
     const wordEl = this.wrapper.querySelector('.audioCall__wordTranslate') as HTMLElement;
-    imgEl.classList.remove('is-hidden');
-    wordEl.classList.remove('is-hidden');
+    if (imgEl && wordEl) {
+      imgEl.classList.remove('is-hidden');
+      wordEl.classList.remove('is-hidden');
+    }
   }
 
   disableChoice() {
@@ -86,7 +88,7 @@ class Game extends Step {
       const selectorEl = this.startScreen.querySelector('select') as HTMLSelectElement;
       const wordsGroup = Number(selectorEl.value);
       const randomWordsPage = () => Math.floor(Math.random() * 29 + 1);
-      this.startGame(randomWordsPage(), wordsGroup).catch((err) => console.warn(err));
+      this.startGame(wordsGroup, randomWordsPage()).catch((err) => console.warn(err));
     });
 
     this.wrapper.addEventListener('change', (e) => {
