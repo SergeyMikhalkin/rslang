@@ -1,5 +1,5 @@
 import { Auth } from '../interfaces/auth';
-import { PageAndGroup } from '../interfaces/pageAndGroup';
+import { PageAndGroup } from '../interfaces/page-and-group';
 
 export const getLocalStorage = (key: string) /*  | PageAndGroup  */ => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return

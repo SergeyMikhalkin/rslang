@@ -1,2 +1,2 @@
-import './js/ebookPage/eBook';
+import './js/ebook/ebook';
 import './index';
