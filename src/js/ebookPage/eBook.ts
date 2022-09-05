@@ -1,23 +1,7 @@
 import { getChunkWords } from '../api/api';
 import { PageAndGroup } from '../interfaces/pageAndGroup';
+import { Word } from '../interfaces/word';
 import { getLocalStorage, setLocalStorage } from '../local-storage/local-storage';
-
-interface ResponseWord {
-  id: string;
-  group: number;
-  page: number;
-  word: string;
-  image: string;
-  audio: string;
-  audioMeaning: string;
-  audioExample: string;
-  textMeaning: string;
-  textExample: string;
-  transcription: string;
-  textExampleTranslate: string;
-  textMeaningTranslate: string;
-  wordTranslate: string;
-}
 
 let allAudioTags: NodeListOf<HTMLAudioElement>;
 
@@ -35,7 +19,7 @@ const playAudio = (audio1: HTMLAudioElement, audio2: HTMLAudioElement, audio3: H
   };
 };
 
-const htmlBookContent = (objWord: ResponseWord) => {
+const htmlBookContent = (objWord: Word) => {
   const url = `https://rslang-data.herokuapp.com/`;
   const cardTemplate = `
     <div class="word-card__wrapper">
@@ -97,8 +81,8 @@ const htmlBookContent = (objWord: ResponseWord) => {
     });
 };
 
-const renderWordsPage = async (page = 0, group = 0) => {
-  const wordArr = (await getChunkWords(page, group)) as [ResponseWord];
+const renderWordsPage = async (group = 0, page = 0) => {
+  const wordArr = (await getChunkWords(group, page)) as [Word];
   const wordsCard = document.getElementById('words__container');
   if (wordsCard) wordsCard.innerHTML = '';
   wordArr.forEach((word) => {
@@ -137,20 +121,20 @@ const selectGroupAndPage = () => {
   const selectPage = document.querySelector('.nav__page-select') as HTMLSelectElement;
   if (data) selectPage.selectedIndex = +data.page;
   selectPage.addEventListener('change', () => {
-    void renderWordsPage(Number(selectPage.value), Number(selectGroup.value));
+    void renderWordsPage(Number(selectGroup.value), Number(selectPage.value));
     setLocalStorage('selectGroupAndPage', {
-      page: selectPage.value,
       group: selectGroup.value,
+      page: selectPage.value,
     });
   });
 
   const selectGroup = document.querySelector('.nav__group-select') as HTMLSelectElement;
   if (data) selectGroup.selectedIndex = +data.group;
   selectGroup.addEventListener('change', () => {
-    void renderWordsPage(Number(selectPage.value), Number(selectGroup.value));
+    void renderWordsPage(Number(selectGroup.value), Number(selectPage.value));
     setLocalStorage('selectGroupAndPage', {
-      page: selectPage.value,
       group: selectGroup.value,
+      page: selectPage.value,
     });
   });
 };
@@ -160,7 +144,7 @@ const initEbookPage = () => {
   createGroupNamber();
   createPageNamber();
   selectGroupAndPage();
-  data ? void renderWordsPage(+data.page, +data.group) : void renderWordsPage();
+  data ? void renderWordsPage(+data.group, +data.page) : void renderWordsPage();
 };
 
 initEbookPage();

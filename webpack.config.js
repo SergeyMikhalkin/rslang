@@ -11,6 +11,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const baseConfig = {
   entry: {
     index: path.resolve(__dirname, './src/index.ts'),
+    sprint: path.resolve(__dirname, './src/sprint.ts'),
     textbook: path.resolve(__dirname, './src/textbook.ts'),
   },
   mode: 'development',
@@ -61,6 +62,11 @@ const baseConfig = {
       template: path.resolve(__dirname, './src/index.html'),
       filename: 'index.html',
       chunks: ['index'],
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, './src/sprint.html'),
+      filename: 'sprint.html',
+      chunks: ['sprint'],
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './src/textbook.html'),
