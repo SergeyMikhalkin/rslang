@@ -11,6 +11,9 @@ const CopyPlugin = require('copy-webpack-plugin');
 const baseConfig = {
   entry: {
     index: path.resolve(__dirname, './src/index.ts'),
+    sprint: path.resolve(__dirname, './src/sprint.ts'),
+    textbook: path.resolve(__dirname, './src/textbook.ts'),
+    statistics: path.resolve(__dirname, './src/statistics.ts'),
     audioCallPage: path.resolve(__dirname, './src/audioCallPage.ts'),
   },
   mode: 'development',
@@ -61,6 +64,21 @@ const baseConfig = {
       template: path.resolve(__dirname, './src/index.html'),
       filename: 'index.html',
       chunks: ['index'],
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, './src/sprint.html'),
+      filename: 'sprint.html',
+      chunks: ['sprint'],
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, './src/textbook.html'),
+      filename: 'textbook.html',
+      chunks: ['textbook'],
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, './src/statistics.html'),
+      filename: 'statistics.html',
+      chunks: ['statistics'],
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './src/audioCallPage.html'),
