@@ -1,11 +1,11 @@
 import { Auth } from '../interfaces/auth';
 import { SignInUser } from '../interfaces/sign-in-user';
 import { User } from '../interfaces/user';
-import { getLocalStorage, setLocalStorage } from '../local-storage/local-storage';
+import { getLocalStorage } from '../local-storage/local-storage';
 
-const base = `https://rslang-data.herokuapp.com`;
+export const base = `https://rslang-data.herokuapp.com`;
 
-export const getChunkWords = async (page: number, group: number) => {
+export const getChunkWords = async (group: number, page: number) => {
   const url = `${base}/words?page=${page}&group=${group}`;
   const rawResponse = await fetch(url);
   if (!rawResponse.ok) throw Error(`Error${rawResponse.status}`);
@@ -38,7 +38,7 @@ export const createUser = async (user: User) => {
 };
 
 export const getUser = async () => {
-  const authData = getLocalStorage('auth');
+  const authData = getLocalStorage('auth') as Auth;
   const rawResponse = await fetch(`${base}/users/${authData.userId}`, {
     method: 'GET',
     headers: {
@@ -51,7 +51,7 @@ export const getUser = async () => {
 };
 
 export const updateUser = async (updateUser: SignInUser) => {
-  const authData = getLocalStorage('auth');
+  const authData = getLocalStorage('auth') as Auth;
   const rawResponse = await fetch(`${base}/users/${authData.userId}`, {
     method: 'PUT',
     headers: {
@@ -66,7 +66,7 @@ export const updateUser = async (updateUser: SignInUser) => {
 };
 
 export const deleteUser = async () => {
-  const authData = getLocalStorage('auth');
+  const authData = getLocalStorage('auth') as Auth;
   const rawResponse = await fetch(`${base}/users/${authData.userId}`, {
     method: 'DELETE',
     headers: {
@@ -78,7 +78,7 @@ export const deleteUser = async () => {
 };
 
 export const getNewToken = async () => {
-  const authData = getLocalStorage('auth');
+  const authData = getLocalStorage('auth') as Auth;
   const url = `${base}/users/${authData.userId}/tokens`;
   const rawResponse = await fetch(url, {
     method: 'GET',
@@ -94,7 +94,7 @@ export const getNewToken = async () => {
 
 // Users/Words
 export const getAllUserWords = async () => {
-  const authData = getLocalStorage('auth');
+  const authData = getLocalStorage('auth') as Auth;
   const url = `${base}/users/${authData.userId}/words`;
   const rawResponse = await fetch(url, {
     method: 'GET',
@@ -108,7 +108,7 @@ export const getAllUserWords = async () => {
 };
 //!
 export const createUserWord = async <T>({ wordId, optional }: { wordId: string; optional: T }) => {
-  const authData = getLocalStorage('auth');
+  const authData = getLocalStorage('auth') as Auth;
   const rawResponse = await fetch(`${base}/users/${authData.userId}/words/${wordId}`, {
     method: 'POST',
     headers: {
@@ -123,7 +123,7 @@ export const createUserWord = async <T>({ wordId, optional }: { wordId: string; 
 };
 
 export const getUserWordById = async (wordId: string) => {
-  const authData = getLocalStorage('auth');
+  const authData = getLocalStorage('auth') as Auth;
   const rawResponse = await fetch(`${base}/users/${authData.userId}/words/${wordId}`, {
     method: 'GET',
     headers: {
@@ -136,7 +136,7 @@ export const getUserWordById = async (wordId: string) => {
 };
 
 export const updateUserWord = async <T>(wordId: string, optional: T) => {
-  const authData = getLocalStorage('auth');
+  const authData = getLocalStorage('auth') as Auth;
   const rawResponse = await fetch(`${base}/users/${authData.userId}/words/${wordId}`, {
     method: 'PUT',
     headers: {
@@ -150,7 +150,7 @@ export const updateUserWord = async <T>(wordId: string, optional: T) => {
 };
 
 export const deleteUserWord = async (wordId: string) => {
-  const authData = getLocalStorage('auth');
+  const authData = getLocalStorage('auth') as Auth;
   const rawResponse = await fetch(`${base}/users/${authData.userId}/words/${wordId}`, {
     method: 'DELETE',
     headers: {
@@ -163,7 +163,7 @@ export const deleteUserWord = async (wordId: string) => {
 
 //Users/AggregatedWords
 export const getAllAggregatedWords = async () => {
-  const authData = getLocalStorage('auth');
+  const authData = getLocalStorage('auth') as Auth;
   const currentFilter = '{"userWord": {"$ne": null}}';
   const url = `${base}/users/${authData.userId}/aggregatedWords?wordsPerPage=3600&filter=${currentFilter}`;
   const rawResponse = await fetch(url, {
@@ -178,7 +178,7 @@ export const getAllAggregatedWords = async () => {
 };
 
 export const getAggregatedWordsById = async (wordId: string) => {
-  const authData = getLocalStorage('auth');
+  const authData = getLocalStorage('auth') as Auth;
   const url = `${base}/users/${authData.userId}/aggregatedWords/${wordId}`;
   const rawResponse = await fetch(url, {
     method: 'GET',
@@ -193,7 +193,7 @@ export const getAggregatedWordsById = async (wordId: string) => {
 
 //Users/Statistic
 export const getStatistics = async () => {
-  const authData = getLocalStorage('auth');
+  const authData = getLocalStorage('auth') as Auth;
   const url = `${base}/users/${authData.userId}/statistics`;
   const rawResponse = await fetch(url, {
     method: 'GET',
@@ -207,7 +207,7 @@ export const getStatistics = async () => {
 };
 //!
 export const setStatistics = async <T>(statistics: { learnedWords: number; optional: T }) => {
-  const authData = getLocalStorage('auth');
+  const authData = getLocalStorage('auth') as Auth;
   const url = `${base}/users/${authData.userId}/statistics`;
   const rawResponse = await fetch(url, {
     method: 'PUT',
@@ -224,7 +224,7 @@ export const setStatistics = async <T>(statistics: { learnedWords: number; optio
 
 //Users/Setting
 export const getSettings = async () => {
-  const authData = getLocalStorage('auth');
+  const authData = getLocalStorage('auth') as Auth;
   const rawResponse = await fetch(`${base}/users/${authData.userId}/settings`, {
     method: 'GET',
     headers: {
@@ -237,7 +237,7 @@ export const getSettings = async () => {
 };
 
 export const setSettings = async <T>(data: { wordsPerDay: number; optional: T }) => {
-  const authData = getLocalStorage('auth');
+  const authData = getLocalStorage('auth') as Auth;
   /* ! Создать интерфейс для optional */
   const rawResponse = await fetch(`${base}/users/${authData.userId}/settings`, {
     method: 'PUT',
