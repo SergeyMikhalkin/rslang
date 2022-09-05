@@ -9,7 +9,10 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 const baseConfig = {
-  entry: path.resolve(__dirname, './src/index.ts'),
+  entry: {
+    index: path.resolve(__dirname, './src/index.ts'), 
+    sprint: path.resolve(__dirname, './src/sprint.ts'),
+  },
   mode: 'development',
   module: {
     rules: [
@@ -50,13 +53,19 @@ const baseConfig = {
     extensions: ['.tsx', '.ts', '.js'],
   },
   output: {
-    filename: 'index.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, './dist/rslang'),
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './src/index.html'),
       filename: 'index.html',
+      chunks: ['index'],
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, './src/sprint.html'),
+      filename: 'sprint.html',
+      chunks: ['sprint'],
     }),
     new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: ['**/*', '!.git'],
