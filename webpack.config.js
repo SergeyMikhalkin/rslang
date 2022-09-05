@@ -70,7 +70,7 @@ const baseConfig = {
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './src/textbook.html'),
-      filename: 'textbook',
+      filename: 'textbook.html',
       chunks: ['textbook'],
     }),
     new CleanWebpackPlugin({
