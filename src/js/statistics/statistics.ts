@@ -1,6 +1,6 @@
 import { getLocalStorage } from '../local-storage/local-storage';
-const renderStatsPage = () => {
-  const statsPage = `
+const renderStatistics = () => {
+  const statistics = `
 <div class="stats__wrapper">
 <h1 class="stats__title">Статистика за день</h1>
 <table class="stats__table" aria-label="customized table">
@@ -39,7 +39,7 @@ const renderStatsPage = () => {
   const statsContent = document.querySelector('.stats-content');
 
   if (getLocalStorage('auth')) {
-    statsContent ? (statsContent.innerHTML = statsPage) : '';
+    statsContent ? (statsContent.innerHTML = statistics) : '';
   }
 };
-renderStatsPage();
+renderStatistics();
