@@ -1,5 +1,5 @@
 import { getChunkWords } from '../api/api';
-import { PageAndGroup } from '../interfaces/pageAndGroup';
+import { PageAndGroup } from '../interfaces/page-and-group';
 import { Word } from '../interfaces/word';
 import { getLocalStorage, setLocalStorage } from '../local-storage/local-storage';
 
