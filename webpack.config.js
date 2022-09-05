@@ -13,6 +13,7 @@ const baseConfig = {
     index: path.resolve(__dirname, './src/index.ts'),
     sprint: path.resolve(__dirname, './src/sprint.ts'),
     textbook: path.resolve(__dirname, './src/textbook.ts'),
+    statistics: path.resolve(__dirname, './src/statistics.ts'),
   },
   mode: 'development',
   module: {
@@ -72,6 +73,11 @@ const baseConfig = {
       template: path.resolve(__dirname, './src/textbook.html'),
       filename: 'textbook.html',
       chunks: ['textbook'],
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, './src/statistics.html'),
+      filename: 'statistics.html',
+      chunks: ['statistics'],
     }),
     new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: ['**/*', '!.git'],
