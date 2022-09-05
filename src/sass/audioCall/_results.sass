@@ -16,7 +16,6 @@
 
   &-item
     display: flex
-    flex-wrap: wrap
     align-items: center
     gap: 25px
     width: 100%
@@ -37,22 +36,29 @@
     align-items: start
     margin-right: auto
 
+    word-break: break-word
     font-weight: 700
     font-size: 20px
     line-height: 25px
     color: #F27A31
   &-word-translate
     font-size: 0.7em
+    line-height: 1.2
     color: #000
 
   &-stat
+    flex: none
     position: relative
-    width: 60px
     padding: 3px 0
     font-weight: 700
     font-size: 20px
     line-height: 25px
     text-align: center
+    @include phone
+      width: 30px
+    @include tablet
+      width: 60px
+
     &::before
       content: ''
       display: block
