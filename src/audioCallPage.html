@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RS Lang</title>
+    <link rel="icon" href="./assets/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bellota:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="audioCall-page">
+    <!-- HEADER -->
+    <header class="header">
+      <button class="header__btn header__btn--menu" data-popup="menu-open-button">menu</button>
+      <button class="header__btn header__btn--about" data-popup="open-about">about</button>
+      <button class="header__btn header__btn--user" data-popup="open-auth-form">user</button>
+    </header>
+
+    <!-- MAIN -->
+    <main class="audioCall">
+      <div class="audioCall__start-container">
+        <img src="./assets/audioCall/start-image.png" class="audioCall__start-image" alt="start" />
+        <form class="audioCall__start-difficulty">
+          <span class="audioCall__start-difficulty-text">Сложность: </span>
+          <select class="audioCall__start-difficulty-selector" name="difficulty" id="">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <span class="audioCall__start-difficulty-selector"></span>
+        </form>
+        <div class="audioCall__start-btn">Начать игру</div>
+      </div>
+    </main>
+    <!-- FOOTER -->
+    <!-- FOOTER -->
+    <footer class="footer">
+      <h3 class="footer__title">Creators' story</h3>
+      <div class="footer-row">
+        <!-- Creators -->
+        <ul class="creators-list">
+          <li class="creators-list__item">
+            <a href="https://github.com/Andreyjkov" class="creators-list__item-avatar">
+              <img src="./assets/footer/github.png" alt="">
+            </a>
+            <span class="creators-list__item-name">Andrey</span>
+          </li>
+          <li class="creators-list__item">
+            <a href="https://github.com/Alekskob33" class="creators-list__item-avatar">
+              <img src="./assets/footer/github.png" alt="">
+            </a>
+            <span class="creators-list__item-name">Alexey</span>
+          </li>
+          <li class="creators-list__item">
+            <a href="https://github.com/sergeyMikhalkin" class="creators-list__item-avatar">
+              <img src="./assets/footer/github.png" alt="">
+            </a>
+            <span class="creators-list__item-name">Sergey</span>
+          </li>
+        </ul>
+        <!-- Copyright -->
+        <span class="footer__copyright">RS Lang 2022</span>
+      </div>
+    </footer>
+  </body>
+</html>

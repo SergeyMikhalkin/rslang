@@ -1,0 +1,95 @@
+.popup
+  position: fixed
+  left: 0
+  top: 0
+  width: 100%
+  height: 100%
+  z-index: 10
+
+  display: flex
+  align-items: center
+  justify-content: center
+
+  transition: all 100ms ease
+  &.is-visible
+    background-color: rgba(#fff, 0.9)
+
+  &__body
+    position: relative
+    width: 100%
+    max-width: 490px
+    padding: 50px 35px
+    background-color: #33BBBA
+    text-align: center
+
+    opacity: 0
+    transition: all 300ms ease
+    @at-root .popup.is-visible &
+      opacity: 1
+
+  &__content
+    display: flex
+    flex-direction: column
+    height: 100%
+    min-height: 500px
+    padding: 28px
+    border: 1px solid #EFEFEF
+    color: #fff
+
+  &__btn-close
+    position: absolute
+    top: 0
+    right: 0
+    transform: translate(50%, -50%)
+
+    display: block
+    width: 82px
+    height: 82px
+    background: url('./assets/popup/btn-close.png') no-repeat center/contain
+    cursor: pointer
+
+    @include phone
+      left: 0
+      top: -50px
+      margin: 0 auto
+      transform: none
+
+    &:hover
+      background-size: 80%
+
+  &__title
+    margin-bottom: 40px
+
+    font-style: normal
+    font-weight: 700
+    font-size: 48px
+    line-height: 60px
+    text-align: center
+    color: #fff
+
+  &__list
+    align-self: center
+    display: flex
+    flex-direction: column
+    color: inherit
+    text-align: left
+    &-item
+      position: relative
+      margin-bottom: 11px
+      padding-left: 58px
+      background: url(./assets/popup/menu-item-icon.png) no-repeat left / 40px 40px
+
+      font-weight: 700
+      font-size: 24px
+      line-height: 30px
+      text-decoration: none
+      color: #fff
+      transition: all 150ms
+
+      &:hover
+        text-decoration: underline
+
+  &__about-pic
+    width: 100%
+    max-width: 180px
+    margin: 50px auto 0

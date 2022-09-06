@@ -1,0 +1,38 @@
+.auth-form
+  display: flex
+  flex-direction: column
+
+  &__field,
+  &__btn
+    margin-bottom: 15px
+    padding: 10px
+    border-radius: 5px
+
+  &__btn
+    align-self: flex-start
+    display: inline-block
+    color: #fff
+    background-color: #F27A31
+
+  &__error
+    min-height: 30px
+    margin-bottom: 40px
+    padding: 18px 0 18px 50px
+
+    border-bottom: 2px solid #F27A31
+    background: url('./assets/popup/error.png') no-repeat left 0px / auto 34px
+    text-align: left
+    &:empty
+      display: none
+
+.form-tab
+  &__toggler
+    &:not(.is-active)
+      color: #000
+      &:hover
+        cursor: pointer
+        text-decoration: underline
+
+  &-togglers
+    margin-top: auto
+    color: #fff

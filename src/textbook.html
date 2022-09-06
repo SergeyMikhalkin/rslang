@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RS Lang</title>
+  <link rel="icon" href="./assets/favicon.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bellota:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+    rel="stylesheet">
+  <link rel="shortcut icon" href="#">
+</head>
+
+<body class="home-page">
+  <!-- PRELOADER -->
+  <div class="preloader">
+    <svg class="preloader__image" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+      <path fill="currentColor"
+        d="M304 48c0 26.51-21.49 48-48 48s-48-21.49-48-48 21.49-48 48-48 48 21.49 48 48zm-48 368c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zm208-208c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zM96 256c0-26.51-21.49-48-48-48S0 229.49 0 256s21.49 48 48 48 48-21.49 48-48zm12.922 99.078c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.491-48-48-48zm294.156 0c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.49-48-48-48zM108.922 60.922c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.491-48-48-48z">
+      </path>
+    </svg>
+  </div>
+  <!-- HEADER -->
+  <header class="header">
+    <button class="header__btn header__btn--menu" data-popup="menu-open-button">menu</button>
+    <button class="header__btn header__btn--about" data-popup="open-about">about</button>
+    <button class="header__btn header__btn--user" data-popup="open-auth-form">user</button>
+  </header>
+
+  <!-- MAIN -->
+  <main class="e-book__content">
+    <div class="e-book__navigation">
+      <div class="nav__group">
+        <select class="nav__group-select select-css"></select>
+      </div>
+      <div class="nav__page">
+        <select class="nav__page-select select-css"></select>
+      </div>
+      <div class="game-btn">
+        <a class="e-book__btn-sprint links-game" href="">Спринт</a>
+      </div>
+      <div class="game-btn">
+        <a class="e-book__btn-audio links-game" href="">Аудиовызов</a>
+      </div>
+    </div>
+    <div class="words__container" id="words__container"></div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <h3 class="footer__title">Creators' story</h3>
+    <div class="footer-row">
+      <!-- Creators -->
+      <ul class="creators-list">
+        <li class="creators-list__item">
+          <a href="https://github.com/Andreyjkov" class="creators-list__item-avatar">
+            <img src="./assets/footer/github.png" alt="">
+          </a>
+          <span class="creators-list__item-name">Andrey</span>
+        </li>
+        <li class="creators-list__item">
+          <a href="https://github.com/Alekskob33" class="creators-list__item-avatar">
+            <img src="./assets/footer/github.png" alt="">
+          </a>
+          <span class="creators-list__item-name">Alexey</span>
+        </li>
+        <li class="creators-list__item">
+          <a href="https://github.com/sergeyMikhalkin" class="creators-list__item-avatar">
+            <img src="./assets/footer/github.png" alt="">
+          </a>
+          <span class="creators-list__item-name">Sergey</span>
+        </li>
+      </ul>
+      <!-- Copyright -->
+      <span class="footer__copyright">RS Lang 2022</span>
+    </div>
+  </footer>
+  <!-- Preloader script-->
+  <script>
+    window.onload = function () {
+      document.body.classList.add('loaded_hiding');
+      window.setTimeout(function () {
+        document.body.classList.add('loaded');
+        document.body.classList.remove('loaded_hiding');
+      }, 500);
+    }
+  </script>
+</body>
+
+</html>
